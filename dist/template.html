@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>{0} 数据库文档</title>
+    <style>
+        html,
+        body {{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }}
+        a{{
+            text-decoration: none;
+            color: #3448a1;
+            font-size: smaller;
+            font-weight: 600;
+        }}
+        a:visited{{
+            color: #3448a1
+        }}
+        .TitleColor {{
+            background-color: #698CC3;
+            border-bottom: 1px solid #000000;
+        }}
+
+        .HeadTitle {{
+            font: bold medium "Verdana", "Arial", "Helvetica", "sans-serif";
+            color: #FFFFFF;
+        }}
+        table.tablenamelist tr td{{
+            word-break: break-all;
+        }}
+        .switch {{
+            height: 50px;
+            line-height: 50px;
+            background: #C7C5D9;
+            border-radius: 3px;
+            cursor: pointer;
+            user-select: none;
+            color: #555555;            
+        }}
+        .switch:hover{{
+            background: #808080;
+            color: #000000;
+        }}
+        .det{{
+            width: 100%;
+            word-break: break-all;
+            border: 1px solid #698CC3;
+            overflow: auto;
+        }}
+        .det th{{
+            background: #698CC3;
+            color: #FFFFFF;
+            font: 9pt Tahoma, Verdana;
+            font-weight: bold;
+            text-align: left;
+            height:25px;
+            padding-left:5px;
+            word-break:break-all; 
+            overflow:auto;
+        }}
+        .det tbody tr:nth-child(odd){{
+            background: #EAEFF2;
+        }}
+        .det tbody tr:nth-child(even){{            
+            background:#FFFFFF;
+        }}
+        .det tbody tr td{{
+            font-family: "Arial","宋体", "新宋体"; 
+            font-size: 9pt; color: #000000;
+            padding-left:5px;
+            height:25px;
+            word-break:break-all; 
+            overflow:auto;
+        }} 
+        .totop{{
+            text-align:right;	
+            height:20px;
+            font-size:10px;
+            color:#6699ff;
+            cursor:pointer;
+        }}
+    </style>
+</head>
+
+<body>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+        <tbody>
+            <tr>
+                <td colspan="3" height="63" class="TitleColor">
+                    <span class="HeadTitle">{0} 数据库文档</span>
+                </td>
+            </tr>
+            <tr>
+                <td id="leftnav" nowrap="" valign="middle" align="center" width="198" height="100%"
+                    style="border-right: 1px solid #000000;">
+                    <div style="height:100%;overflow-y:auto;">
+                            <table class="tablenamelist">
+                                <tbody>
+                                    {1}
+                                </tbody>
+                            </table>
+                    </div>
+                    
+                </td>
+                <td height="100%" width="10" title="关闭/打开左栏" style="border-right: 1px solid #C7C5D9;">
+                    <div id="switch" statu="1" class="switch" onclick="toggleLeftNav()">&lt;</div>
+                </td>
+                <td width="100%" height="100%">
+                    <div style="height:100%;overflow-y: auto;padding: 8px">
+                        <a name="top"></a>
+                        {2}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20">
+                    <div style="height: 1px;background:#000000;"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function toggleLeftNav(){{
+            var leftnav = document.getElementById('leftnav')
+            var _switch = document.getElementById('switch')
+            if(_switch.getAttribute('statu') == 1){{
+                leftnav.style.display = 'none'
+                _switch.setAttribute('statu', 0)
+                _switch.innerText = '>'
+            }}
+            else{{
+                leftnav.style.display = 'table-cell'
+                _switch.setAttribute('statu', 1)
+                _switch.innerText = '<'
+            }}
+            
+        }}
+    </script>
+</body>
+</html>
