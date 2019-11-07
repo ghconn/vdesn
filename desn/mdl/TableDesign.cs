@@ -13,6 +13,7 @@ namespace desn.mdl
         public string 数据类型 { get; set; }
         public Int16? 长度MS { get; set; }
         public Int64? 长度MY { get; set; }
+        public Int64? 数值最大位数 { get; set; }
         public int? 小数 { get; set; }
         public string 标识 { get; set; }
         public string 主键 { get; set; }

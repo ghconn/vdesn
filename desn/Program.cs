@@ -188,7 +188,7 @@ namespace desn
                             <th width='140'>列名</th>
                             <th>列说明</th>
                             <th width='100'>数据类型</th>
-                            <th width='50'>长度</th>
+                            <th width='50'>长度或整数位数</th>
                             <th width='30'>小数</th>
                             <th width='30'>标识</th>
                             <th width='30'>主键</th>
@@ -206,7 +206,7 @@ namespace desn
                     <td>{design.列名}</td>
                     <td>{design.列说明}</td>
                     <td>{design.数据类型}</td>
-                    <td>{design.长度MY}</td>
+                    <td>{(design.长度MY == null ? design.数值最大位数 : design.长度MY)}</td>
                     <td>{design.小数}</td>
                     <td>{design.标识}</td>
                     <td>{design.主键}</td>
