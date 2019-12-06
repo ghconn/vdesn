@@ -5,7 +5,7 @@
 
 使用方法
 
-1，安装dotnet core 2.2 sdk
+1，安装dotnet core 2.2 runtime
 
 ![演示](https://github.com/ghconn/vdesn/blob/master/1.png)
 
