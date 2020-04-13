@@ -26,20 +26,21 @@ namespace desn
             .Build();
 
             var arg = args.Length > 0 ? args[0] : "";
-            
-            if(arg.ToLower() == "mysql")
+            var arg_prefix = args.Length > 1 ? args[1] : "";
+
+            if (arg.ToLower() == "mysql")
             {
-                MysqlTableDefineToHTML();
+                MysqlTableDefineToHTML(arg_prefix);
             }
             else
             {
-                SqlServerTableDefineToHTML();
+                SqlServerTableDefineToHTML(arg_prefix);
             }
             
             Console.WriteLine("done.");
         }
 
-        static async void SqlServerTableDefineToHTML()
+        static async void SqlServerTableDefineToHTML(string prefix)
         {
             var htmlTask = GetHtmlDocOriginAsync();
 
@@ -51,6 +52,9 @@ namespace desn
             //所有表名及描述
             var tables_desc = dbcontext.SqlQuery<KeyValuePair<string, string>>($@"select tbs.name [Key],ds.value [Value] from {dbname}..sysobjects tbs
             left join sys.extended_properties ds on tbs.id=ds.major_id and ds.minor_id=0 where tbs.xtype='U' order by [Key]").ToList();//dbname..可省略
+            if (string.IsNullOrEmpty(prefix))
+                tables_desc = tables_desc.Where(p => p.Key.StartsWith(prefix)).ToList();
+
             //所有表设计
             var tables_design = dbcontext.SqlQuery<TableDesign>(@"SELECT obj.name AS 表名,
             col.colorder AS 序号,
@@ -134,7 +138,7 @@ namespace desn
             File.WriteAllText(top_0 + ".html", html);
         }
 
-        static async void MysqlTableDefineToHTML()
+        static async void MysqlTableDefineToHTML(string prefix)
         {
             var htmlTask = GetHtmlDocOriginAsync();
 
@@ -147,6 +151,8 @@ namespace desn
             //所有表名及描述
             var tables_desc = dbcontext.SqlQuery<KeyValuePair<string, string>>($@"SELECT TABLE_NAME `Key`
             ,TABLE_COMMENT `Value` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='{dbname}'").ToList();
+            if (!string.IsNullOrEmpty(prefix))
+                tables_desc = tables_desc.Where(p => p.Key.StartsWith(prefix)).ToList();
             //所有表设计
             var tables_design = dbcontext.SqlQuery<TableDesign>($@"SELECT
             TABLE_NAME AS '表名',
@@ -177,6 +183,11 @@ namespace desn
             var right_2 = new StringBuilder();
             foreach (var tb in tables_desc)
             {
+                if (!string.IsNullOrEmpty(prefix) && !tb.Key.StartsWith(prefix))
+                {
+                    continue;
+                }
+
                 right_2.Append($@"<a name='{tb.Key}'></a>
                 <table class='det' cellspacing='1' cellpadding='0'>
                     <thead>
