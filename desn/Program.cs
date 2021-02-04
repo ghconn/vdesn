@@ -51,7 +51,7 @@ namespace desn
             var dbname = dbcontext.SqlQuery<string>("select db_name()").First();
             //所有表名及描述
             var tables_desc = dbcontext.SqlQuery<KeyValuePair<string, string>>($@"select tbs.name [Key],ds.value [Value] from {dbname}..sysobjects tbs
-            left join sys.extended_properties ds on tbs.id=ds.major_id and ds.minor_id=0 where tbs.xtype='U' order by [Key]").ToList();//dbname..可省略
+            left join sys.extended_properties ds on tbs.id=ds.major_id and ds.minor_id=0 where tbs.xtype='U' and tbs.name <> 'sysdiagrams' order by [Key]").ToList();//dbname..可省略
             if (string.IsNullOrEmpty(prefix))
                 tables_desc = tables_desc.Where(p => p.Key.StartsWith(prefix)).ToList();
 

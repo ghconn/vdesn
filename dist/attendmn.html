@@ -1,0 +1,2898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>attendmn 数据库文档</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #3448a1;
+            font-size: smaller;
+            font-weight: 600;
+        }
+        a:visited{
+            color: #3448a1
+        }
+        .TitleColor {
+            background-color: #698CC3;
+            border-bottom: 1px solid #000000;
+        }
+
+        .HeadTitle {
+            font: bold medium "Verdana", "Arial", "Helvetica", "sans-serif";
+            color: #FFFFFF;
+        }
+        table.tablenamelist tr td{
+            word-break: break-all;
+        }
+        .switch {
+            height: 50px;
+            line-height: 50px;
+            background: #C7C5D9;
+            border-radius: 3px;
+            cursor: pointer;
+            user-select: none;
+            color: #555555;            
+        }
+        .switch:hover{
+            background: #808080;
+            color: #000000;
+        }
+        .det{
+            width: 100%;
+            word-break: break-all;
+            border: 1px solid #698CC3;
+            overflow: auto;
+        }
+        .det th{
+            background: #698CC3;
+            color: #FFFFFF;
+            font: 9pt Tahoma, Verdana;
+            font-weight: bold;
+            text-align: left;
+            height:25px;
+            padding-left:5px;
+            word-break:break-all; 
+            overflow:auto;
+        }
+        .det tbody tr:nth-child(odd){
+            background: #EAEFF2;
+        }
+        .det tbody tr:nth-child(even){            
+            background:#FFFFFF;
+        }
+        .det tbody tr td{
+            font-family: "Arial","宋体", "新宋体"; 
+            font-size: 9pt; color: #000000;
+            padding-left:5px;
+            height:25px;
+            word-break:break-all; 
+            overflow:auto;
+        } 
+        .totop{
+            text-align:right;	
+            height:20px;
+            font-size:10px;
+            color:#6699ff;
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+        <tbody>
+            <tr>
+                <td colspan="3" height="63" class="TitleColor">
+                    <span class="HeadTitle">attendmn 数据库文档</span>
+                </td>
+            </tr>
+            <tr>
+                <td id="leftnav" nowrap="" valign="middle" align="center" width="198" height="100%"
+                    style="border-right: 1px solid #000000;">
+                    <div style="height:100%;overflow-y:auto;">
+                            <table class="tablenamelist">
+                                <tbody>
+                                    <tr><td><a href='#zp_hr'>zp_hr </a></td></tr>
+<tr><td><a href='#zp_hrscetion'>zp_hrscetion </a></td></tr>
+<tr><td><a href='#zp_inev_template'>zp_inev_template 面试评价模板表</a></td></tr>
+<tr><td><a href='#zp_interviewevaluations'>zp_interviewevaluations  招聘管理--面试评价表</a></td></tr>
+<tr><td><a href='#zp_interviewevaluationsdetail'>zp_interviewevaluationsdetail  招聘管理--面试评价表 从表</a></td></tr>
+<tr><td><a href='#zp_pingjiaconfigure'>zp_pingjiaconfigure 面试评价表模板</a></td></tr>
+<tr><td><a href='#zp_pingjiaconfiguredetail'>zp_pingjiaconfiguredetail 面试评价表模板从表</a></td></tr>
+<tr><td><a href='#zp_positioncollection'>zp_positioncollection 职位收藏表</a></td></tr>
+<tr><td><a href='#zp_positioninfo'>zp_positioninfo </a></td></tr>
+<tr><td><a href='#zp_positionrecommend'>zp_positionrecommend 招聘模块：职位推荐表</a></td></tr>
+<tr><td><a href='#zp_recommentrecord'>zp_recommentrecord 招聘模块：推荐记录跟进表</a></td></tr>
+<tr><td><a href='#zp_resume_projexp'>zp_resume_projexp 简历分析-项目经验表</a></td></tr>
+<tr><td><a href='#zp_resume_summary'>zp_resume_summary 简历分析-基础信息表</a></td></tr>
+<tr><td><a href='#zp_resume_workexp'>zp_resume_workexp 简历分析-工作经验表</a></td></tr>
+<tr><td><a href='#zp_uploadfiles'>zp_uploadfiles 上传附件表</a></td></tr>
+                                </tbody>
+                            </table>
+                    </div>
+                    
+                </td>
+                <td height="100%" width="10" title="关闭/打开左栏" style="border-right: 1px solid #C7C5D9;">
+                    <div id="switch" statu="1" class="switch" onclick="toggleLeftNav()">&lt;</div>
+                </td>
+                <td width="100%" height="100%">
+                    <div style="height:100%;overflow-y: auto;padding: 8px">
+                        <a name="top"></a>
+                        <a name='zp_hr'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_hr </th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>StaffID</td>
+                    <td>员工ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>Name</td>
+                    <td>面试官名称</td>
+                    <td>varchar</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>Phone</td>
+                    <td>面试官电话</td>
+                    <td>varchar</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>CustomerID</td>
+                    <td>所属客户ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>IsDel</td>
+                    <td>已删除（1是0否）</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>CreateUserID</td>
+                    <td>创建人id</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>CreateUserName</td>
+                    <td>创建人姓名</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人id</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>UpdateUserName</td>
+                    <td>修改人姓名</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_hrscetion'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_hrscetion </th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>ForeignID</td>
+                    <td>面试官ID、求职者推荐记录ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>SectionDate</td>
+                    <td>时间段日期</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>SectionTimeS</td>
+                    <td>时间段开始时间</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>SectionTimeE</td>
+                    <td>时间段结束时间</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>EventsType</td>
+                    <td>1面试官2求职者</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_inev_template'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_inev_template 面试评价模板表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>Name</td>
+                    <td>模板名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_interviewevaluations'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_interviewevaluations  招聘管理--面试评价表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PingjiaConfigureID</td>
+                    <td>模板ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>PositionrecommendID</td>
+                    <td>职位推荐表ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>Name</td>
+                    <td>姓名</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>ReportDutyTime</td>
+                    <td>到岗时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0:未删除 1：已删除)</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>CreateUserName</td>
+                    <td></td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>Type</td>
+                    <td></td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_interviewevaluationsdetail'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_interviewevaluationsdetail  招聘管理--面试评价表 从表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td></td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>InterviewEvaluationsID</td>
+                    <td>主表ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>PingjiaConfigureDetailID</td>
+                    <td>考核内容内容ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>AssessmentItems</td>
+                    <td>考核项目（字典）</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>AssessmentPoints</td>
+                    <td>考核要点</td>
+                    <td>varchar</td>
+                    <td>100</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>Assess</td>
+                    <td>评价（优秀，良好，较差，很差 ）</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>CreateUserName</td>
+                    <td></td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>ZTJP</td>
+                    <td>总体评价内容</td>
+                    <td>varchar</td>
+                    <td>355</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_pingjiaconfigure'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_pingjiaconfigure 面试评价表模板</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>TemplateName</td>
+                    <td>模板名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>Type</td>
+                    <td>面试评价表类型</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>Remark</td>
+                    <td>备注</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>Status</td>
+                    <td>状态（ 正常/关闭）</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0:未删除 1：已删除)</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>CreateUserName</td>
+                    <td></td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_pingjiaconfiguredetail'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_pingjiaconfiguredetail 面试评价表模板从表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td></td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>AssessmentItems</td>
+                    <td>考核项目（字典）</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>AssessmentPoints</td>
+                    <td>考核要点</td>
+                    <td>varchar</td>
+                    <td>100</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>ParentID</td>
+                    <td>考核要点对应考核项目</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>pingjiaconfigureID</td>
+                    <td>面试评价表ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>Sort</td>
+                    <td>排序</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_positioncollection'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_positioncollection 职位收藏表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PositionID</td>
+                    <td>职位ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>PositionName</td>
+                    <td>职位名称</td>
+                    <td>varchar</td>
+                    <td>60</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>Remark</td>
+                    <td>备注</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>Status</td>
+                    <td>状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0:未删除 1：已删除)</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>CreateUserName</td>
+                    <td>创建人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>UpdateUserName</td>
+                    <td>修改人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_positioninfo'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_positioninfo </th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>PID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PCode</td>
+                    <td>职位编号</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>PName</td>
+                    <td>职位名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>LineManagerID</td>
+                    <td>人员经理ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>LineManagerName</td>
+                    <td>人员经理名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>RecruitDepartmentID</td>
+                    <td>招聘部门ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>RecruitDepartmentName</td>
+                    <td>招聘部门名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>RecruitStartTime</td>
+                    <td>招聘开始时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>Skill</td>
+                    <td>技能</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>RecruitLeaderID</td>
+                    <td>招聘负责人ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>RecruitLeaderName</td>
+                    <td>招聘负责人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>emali</td>
+                    <td>通知邮箱</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>13</td>
+                    <td>PositionDuty</td>
+                    <td>职位职责</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>14</td>
+                    <td>PositionRequest</td>
+                    <td>职位要求</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>15</td>
+                    <td>CustomerID</td>
+                    <td>所属客户ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>16</td>
+                    <td>CustomerName</td>
+                    <td>所属客户名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>17</td>
+                    <td>ProjectID</td>
+                    <td>所属项目ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>18</td>
+                    <td>ProjectName</td>
+                    <td>所属项目名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>19</td>
+                    <td>ProjectGroupID</td>
+                    <td>所属项目组ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>20</td>
+                    <td>ProjectGroupName</td>
+                    <td>所属项目组名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>21</td>
+                    <td>RecruitCount</td>
+                    <td>招聘人数</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>22</td>
+                    <td>WrokPlace</td>
+                    <td>工作地点</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>23</td>
+                    <td>HasNeedCheck</td>
+                    <td>是否需要审核</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>24</td>
+                    <td>HasNeedInterCheck</td>
+                    <td>是否需要电面</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>25</td>
+                    <td>HasOnlyInterCheck</td>
+                    <td>是否只需要电面</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>26</td>
+                    <td>Interviewer</td>
+                    <td>面试官</td>
+                    <td>varchar</td>
+                    <td>3000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>27</td>
+                    <td>InterviewerTel</td>
+                    <td>面试电话</td>
+                    <td>varchar</td>
+                    <td>3000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>28</td>
+                    <td>InterviewerAddress</td>
+                    <td>面试地址</td>
+                    <td>varchar</td>
+                    <td>120</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>29</td>
+                    <td>Remark</td>
+                    <td>备注</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>30</td>
+                    <td>Status</td>
+                    <td>状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>31</td>
+                    <td>Priority</td>
+                    <td>职位优先级</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>32</td>
+                    <td>PosRank</td>
+                    <td>职位级别</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>33</td>
+                    <td>ProvinceCode</td>
+                    <td>省</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>34</td>
+                    <td>CityCode</td>
+                    <td>市</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>35</td>
+                    <td>AttachList</td>
+                    <td>附件</td>
+                    <td>varchar</td>
+                    <td>3000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>36</td>
+                    <td>InterviewAddress</td>
+                    <td>面试地点</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>37</td>
+                    <td>RecommendedGuidance</td>
+                    <td>推荐指导意见</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>38</td>
+                    <td>SalaryRange</td>
+                    <td>薪资范围</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>39</td>
+                    <td>CompanyOrProjectIntroduction</td>
+                    <td>公司或项目组介绍</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>40</td>
+                    <td>ProjectAttraction</td>
+                    <td>项目吸引点</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>41</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0:未删除 1：已删除)</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>42</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>43</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>44</td>
+                    <td>CreateUserName</td>
+                    <td>创建人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>45</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>46</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>47</td>
+                    <td>UpdateUserName</td>
+                    <td>修改人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>48</td>
+                    <td>PingJiaConfigureID</td>
+                    <td>面试评价表ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_positionrecommend'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_positionrecommend 招聘模块：职位推荐表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>PRID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PID</td>
+                    <td>职位信息ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>Name</td>
+                    <td>姓名</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>Phone</td>
+                    <td>电话</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>ArrivalTime</td>
+                    <td>到岗时间</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>WorkYears</td>
+                    <td>工作年限</td>
+                    <td>varchar</td>
+                    <td>20</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>OldSalary</td>
+                    <td>原薪资</td>
+                    <td>varchar</td>
+                    <td>20</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>ExpectationSalary</td>
+                    <td>期望薪资</td>
+                    <td>varchar</td>
+                    <td>20</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>RecommenderID</td>
+                    <td>推荐人ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>RecommenderName</td>
+                    <td>推荐人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>RecommendReason</td>
+                    <td>推荐理由</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>EntryTime</td>
+                    <td>入职时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>13</td>
+                    <td>InterviewTime</td>
+                    <td>面试时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>14</td>
+                    <td>ElectricfaceTime</td>
+                    <td>电面面试时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>15</td>
+                    <td>AttamentUrl</td>
+                    <td>附件</td>
+                    <td>varchar</td>
+                    <td>100</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>16</td>
+                    <td>AttamentImg</td>
+                    <td>附件图片</td>
+                    <td>varchar</td>
+                    <td>1000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>17</td>
+                    <td>CustomerStatus</td>
+                    <td>推荐客户状态(1-已推荐，2-未推荐)</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td>2</td>
+                    </tr>
+<tr>
+                    <td>18</td>
+                    <td>IsPassElectricface</td>
+                    <td>是否通过电面(0-未通过，1-通过)</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td>0</td>
+                    </tr>
+<tr>
+                    <td>19</td>
+                    <td>Remark</td>
+                    <td>备注</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>20</td>
+                    <td>Status</td>
+                    <td>状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>21</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0:未删除 1：已删除)</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>22</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>23</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>24</td>
+                    <td>CreateUserName</td>
+                    <td>创建人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>25</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>26</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>27</td>
+                    <td>UpdateUserName</td>
+                    <td>修改人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_recommentrecord'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_recommentrecord 招聘模块：推荐记录跟进表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>√</td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PRID</td>
+                    <td>推荐信息ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>RecordReason</td>
+                    <td>记录原因</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>OldStatus</td>
+                    <td>原状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>NewStatus</td>
+                    <td>新状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>Comment</td>
+                    <td>描述</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>Remark</td>
+                    <td>备注</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>Status</td>
+                    <td>状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0:未删除 1：已删除)</td>
+                    <td>tinyint</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>CreateUserName</td>
+                    <td>创建人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>13</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>14</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>bigint</td>
+                    <td>19</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>15</td>
+                    <td>UpdateUserName</td>
+                    <td>修改人名称</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_resume_projexp'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_resume_projexp 简历分析-项目经验表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PRID</td>
+                    <td>推荐记录ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>SDate</td>
+                    <td>开始日期</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>EDate</td>
+                    <td>结束日期</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>Name</td>
+                    <td>项目名称</td>
+                    <td>varchar</td>
+                    <td>100</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>ProjDescription</td>
+                    <td>项目描述</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_resume_summary'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_resume_summary 简历分析-基础信息表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PRID</td>
+                    <td>推荐记录ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>Name</td>
+                    <td>姓名</td>
+                    <td>varchar</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>Phone</td>
+                    <td>手机号</td>
+                    <td>varchar</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>Qualification</td>
+                    <td>学历</td>
+                    <td>varchar</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>School</td>
+                    <td>学校</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>ExpectationSalary</td>
+                    <td>期望薪资</td>
+                    <td>varchar</td>
+                    <td>30</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>SelfAppraisal</td>
+                    <td>自我评价</td>
+                    <td>varchar</td>
+                    <td>1000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>SWorkExp</td>
+                    <td>工作经验(全部)</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>SProjkExp</td>
+                    <td>项目经验(全部)</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_resume_workexp'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_resume_workexp 简历分析-工作经验表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>PRID</td>
+                    <td>推荐记录ID</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>SDate</td>
+                    <td>开始日期</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>EDate</td>
+                    <td>结束日期</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>Company</td>
+                    <td>公司</td>
+                    <td>varchar</td>
+                    <td>100</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>JobDescription</td>
+                    <td>工作描述</td>
+                    <td>text</td>
+                    <td>65535</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div><a name='zp_uploadfiles'></a>
+                <table class='det' cellspacing='1' cellpadding='0'>
+                    <thead>
+                        <tr>
+                            <th colspan='10'>zp_uploadfiles 上传附件表</th>
+                        </tr>
+                        <tr>
+                            <th width='30'>序号</th>
+                            <th width='140'>列名</th>
+                            <th>列说明</th>
+                            <th width='100'>数据类型</th>
+                            <th width='50'>长度或整数位数</th>
+                            <th width='30'>小数</th>
+                            <th width='30'>标识</th>
+                            <th width='30'>主键</th>
+                            <th width='30'>空值</th>
+                            <th width='70'>默认值</th>
+                        </tr>                                
+                    </thead>
+                    <tbody>
+<tr>
+                    <td>1</td>
+                    <td>ID</td>
+                    <td>主键</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>2</td>
+                    <td>FileID</td>
+                    <td>所上传数据的ID(例如：发布文章并上传附件，存当前发布的这篇文章的ID)</td>
+                    <td>varchar</td>
+                    <td>50</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>3</td>
+                    <td>FileName</td>
+                    <td>附件</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>4</td>
+                    <td>SaveUrl</td>
+                    <td>图片保存的路径</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>5</td>
+                    <td>Summary</td>
+                    <td>内容摘要</td>
+                    <td>mediumtext</td>
+                    <td>16777215</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>6</td>
+                    <td>Remark</td>
+                    <td>备注</td>
+                    <td>varchar</td>
+                    <td>255</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>7</td>
+                    <td>Status</td>
+                    <td>状态</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>8</td>
+                    <td>IsDel</td>
+                    <td>是否删除(0-未删除  1-删除)</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td>0</td>
+                    </tr>
+<tr>
+                    <td>9</td>
+                    <td>CreateUserID</td>
+                    <td>创建人ID</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>10</td>
+                    <td>CreateUserName</td>
+                    <td>创建人姓名</td>
+                    <td>varchar</td>
+                    <td>60</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>11</td>
+                    <td>CreateTime</td>
+                    <td>创建时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>12</td>
+                    <td>UpdateUserID</td>
+                    <td>修改人ID</td>
+                    <td>int</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>13</td>
+                    <td>UpdateUserName</td>
+                    <td>修改人姓名</td>
+                    <td>varchar</td>
+                    <td>60</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+<tr>
+                    <td>14</td>
+                    <td>UpdateTime</td>
+                    <td>修改时间</td>
+                    <td>datetime</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>√</td>
+                    <td></td>
+                    </tr>
+</tbody></table><div class='totop' onclick='javascript:location.href="#top"' href='#top'>TOP</div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" height="20">
+                    <div style="height: 1px;background:#000000;"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function toggleLeftNav(){
+            var leftnav = document.getElementById('leftnav')
+            var _switch = document.getElementById('switch')
+            if(_switch.getAttribute('statu') == 1){
+                leftnav.style.display = 'none'
+                _switch.setAttribute('statu', 0)
+                _switch.innerText = '>'
+            }
+            else{
+                leftnav.style.display = 'table-cell'
+                _switch.setAttribute('statu', 1)
+                _switch.innerText = '<'
+            }
+            
+        }
+    </script>
+</body>
+</html>
