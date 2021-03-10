@@ -82,7 +82,8 @@ namespace desn
             INNER JOIN dbo.sysobjects obj ON col.id = obj.id AND obj.xtype = 'U' AND obj.status >= 0 ------(xtype = 'U'非用户表)
             LEFT JOIN dbo.syscomments comm ON col.cdefault = comm.id 
             LEFT JOIN sys.extended_properties ep ON col.id = ep.major_id AND col.colid = ep.minor_id AND ep.name = 'MS_Description' 
-            LEFT  JOIN sys.extended_properties epTwo ON obj.id = epTwo.major_id AND epTwo.minor_id = 0 AND epTwo.name = 'MS_Description'").ToList();
+            LEFT  JOIN sys.extended_properties epTwo ON obj.id = epTwo.major_id AND epTwo.minor_id = 0 AND epTwo.name = 'MS_Description'
+            ORDER BY [表名],[序号]").ToList();
             #endregion
 
             #region 拼接字符串
